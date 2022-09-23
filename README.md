@@ -7,7 +7,8 @@ Cборка Webpack + TypeScript + React, основные инструмент�
 - [Webpack](https://webpack.js.org/guides/getting-started/),
 - [Babel](https://babeljs.io/setup),
 - [React](https://ru.react.js.org/docs/getting-started.html),
-- [Sass](https://github.com/sass/dart-sass),
+- [React Router](https://reactrouter.com/en/main),
+- [Styled Components](https://styled-components.com/docs),
 - [Axios](https://axios-http.com/docs/intro).
 
 для тестов:

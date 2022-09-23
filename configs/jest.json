@@ -14,7 +14,7 @@
     "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
     "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
   ],
-  "moduleDirectories": ["node_modules"],
+  "moduleDirectories": ["node_modules", "<rootDir>/src/"],
   "globals": {
     "DEVELOPMENT": false,
     "FAKE_SERVER": false
