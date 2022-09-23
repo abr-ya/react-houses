@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "firebase": "^9.10.0",
     "react-router-dom": "^6.4.1",
     "styled-components": "^5.3.5"
   }

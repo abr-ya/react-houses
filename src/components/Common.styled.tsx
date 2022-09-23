@@ -8,10 +8,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #2bbb;
-    color: #fff;
-    line-height: 1.6;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f2f4f8;
+    margin: 0;
+    box-sizing: border-box;
   }
 `;
 
