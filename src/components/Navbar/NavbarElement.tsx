@@ -20,7 +20,6 @@ const NavbarElement = ({ path, title }: INavbarElement) => {
   const location = useLocation();
 
   const isActive = () => path === location.pathname;
-  console.log(path, location.pathname);
 
   let Icon;
   switch (path) {

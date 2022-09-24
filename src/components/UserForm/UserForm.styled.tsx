@@ -1,0 +1,58 @@
+import styled, { css } from "styled-components/macro";
+
+export const InputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+`;
+
+export const StyledInput = styled.input<{ icon?: string }>`
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+  border: none;
+  background: #fff;
+  border-radius: 3rem;
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  padding: 0 3rem;
+  font-size: 1rem;
+
+  ${({ icon }) =>
+    icon &&
+    css`
+      background: url("./icons/${icon}.svg") #ffffff 2.5% center no-repeat;
+    `}
+`;
+
+export const StyledLabel = styled.label`
+  padding: 12px;
+`;
+
+export const ButtonBlock = styled.div`
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+`;
+
+export const ButtonText = styled.p`
+  font-size: 1.5rem;
+  font-weight: 700;
+`;
+
+export const StyledButton = styled.button`
+  cursor: pointer;
+  padding: 12px;
+  outline: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: #00cc66;
+  border-radius: 50%;
+  background: url("./icons/arrowRightIcon.svg") #00cc66 center no-repeat;
+`;
