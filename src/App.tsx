@@ -1,13 +1,16 @@
-import GlobalStyle, { Container } from "./components/Common.styled";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import GlobalStyle from "./components/Common.styled";
+import { Home, About, Error404 } from "./pages";
 
 const App = () => (
-  <>
+  <Router>
     <GlobalStyle />
-    <Container>
-      <h1>Hello, Styled React 2022-09!</h1>
-      <h2>ENV test: {process.env.TEST}</h2>
-    </Container>
-  </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="*" element={<Error404 />} />
+    </Routes>
+  </Router>
 );
 
 export default App;
