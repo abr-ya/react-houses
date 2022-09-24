@@ -30,8 +30,9 @@ export const StyledLabel = styled.label`
 `;
 
 export const ButtonBlock = styled.div`
-  margin-top: 3rem;
   display: flex;
+  padding: 10px;
+  margin-top: 20px;
   justify-content: space-between;
   align-items: center;
   position: inherit;

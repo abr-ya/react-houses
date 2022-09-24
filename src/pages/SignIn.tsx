@@ -3,7 +3,7 @@ import { Container } from "components/Common.styled";
 import UserForm from "components/UserForm/UserForm";
 
 const SignIn = () => {
-  const formHandler = (email: string, pass: string) => {
+  const formHandler = ({ email, pass }) => {
     console.log(email, pass);
   };
 

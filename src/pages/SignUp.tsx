@@ -1,10 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "components/Common.styled";
 import UserForm from "components/UserForm/UserForm";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 const SignUp = () => {
-  const formHandler = (email: string, pass: string) => {
-    console.log(email, pass);
+  const navigate = useNavigate();
+
+  const formHandler = async ({ name, email, pass }) => {
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+      const { user } = userCredential;
+      console.log(`создали пользователя: ${user.uid}`);
+
+      updateProfile(auth.currentUser, { displayName: name });
+
+      const timestamp = serverTimestamp();
+      const formDataCopy = { name, email, timestamp };
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

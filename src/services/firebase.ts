@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-const { API_KEY, PROJECT_ID } = process.env;
+const API_KEY = process.env.API_KEY;
+const PROJECT_ID = process.env.PROJECT_ID;
 
 // Firebase configuration
 const firebaseConfig = {

@@ -1,8 +1,14 @@
 import { useState, FormEvent } from "react";
 import { ButtonBlock, ButtonText, InputBlock, StyledButton, StyledInput, StyledLabel } from "./UserForm.styled";
 
+interface IUserFormData {
+  name?: string;
+  email: string;
+  pass: string;
+}
+
 interface IUserForm {
-  formHandler: (email: string, pass: string) => void;
+  formHandler: (data: IUserFormData) => void;
   buttonTitle: string;
   showName?: boolean;
 }
@@ -14,8 +20,7 @@ const UserForm = ({ formHandler, buttonTitle, showName }: IUserForm): JSX.Elemen
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    formHandler(email, pass);
-    console.log(name);
+    formHandler({ name, email, pass });
   };
 
   return (
