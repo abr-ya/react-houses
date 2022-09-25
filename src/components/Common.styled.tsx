@@ -13,14 +13,32 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
   }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+    display: block;
+    color: #000000;
+  }
+
+  button {
+    border: none;
+    outline: none;
+  }
 `;
 
 export default GlobalStyle;
 
 export const Container = styled.div`
-  max-width: 768px;
-  margin: 20px auto;
-  padding: 0 20px;
+  margin: 2rem;
+  padding: 0;
+
+  @media (min-width: 1024px) {
+    margin: 3rem;
+  }
 `;
 
 export const Card = styled.div`

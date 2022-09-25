@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Container } from "components/Common.styled";
 import UserForm from "components/UserForm/UserForm";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { toast } from "react-toastify";
+import { topRight3sec } from "utils/toastOptions";
+import { Container } from "components/Common.styled";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ const SignUp = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong with registration", topRight3sec);
     }
   };
 

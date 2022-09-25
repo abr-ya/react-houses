@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
+import { topRight3sec } from "utils/toastOptions";
 import { Container } from "components/Common.styled";
 import UserForm from "components/UserForm/UserForm";
 
@@ -15,6 +17,7 @@ const SignIn = () => {
       if (userCredential.user) navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error("Wrong Login or Password!", topRight3sec);
     }
   };
 

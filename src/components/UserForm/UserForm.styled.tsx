@@ -36,18 +36,21 @@ export const ButtonBlock = styled.div`
   justify-content: space-between;
   align-items: center;
   position: inherit;
+
+  @media (min-width: 1024px) {
+    justify-content: start;
+  }
 `;
 
 export const ButtonText = styled.p`
   font-size: 1.5rem;
   font-weight: 700;
+  margin-right: 20px;
 `;
 
 export const StyledButton = styled.button`
   cursor: pointer;
   padding: 12px;
-  outline: none;
-  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
