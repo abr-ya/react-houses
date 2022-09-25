@@ -19,7 +19,7 @@ export default GlobalStyle;
 
 export const Container = styled.div`
   max-width: 768px;
-  margin: auto;
+  margin: 20px auto;
   padding: 0 20px;
 `;
 

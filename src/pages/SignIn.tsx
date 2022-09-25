@@ -1,10 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Container } from "components/Common.styled";
 import UserForm from "components/UserForm/UserForm";
 
 const SignIn = () => {
-  const formHandler = ({ email, pass }) => {
-    console.log(email, pass);
+  const navigate = useNavigate();
+
+  const formHandler = async ({ email, pass }) => {
+    console.log("SignIn", email, pass);
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, pass);
+      if (userCredential.user) navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
