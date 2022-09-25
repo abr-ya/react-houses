@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components/macro";
 
 const GlobalStyle = createGlobalStyle`
@@ -56,4 +57,12 @@ export const Old = styled.p`
 
 export const AboutList = styled.ul`
   margin-top: 20px;
+`;
+
+export const GreenLink = styled(Link)`
+  margin-top: 2rem;
+  color: #00cc66;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
 `;
