@@ -6,6 +6,7 @@ import { db } from "../services/firebase";
 import { toast } from "react-toastify";
 import { topRight3sec } from "utils/toastOptions";
 import { Container, GreenLink } from "components/Common.styled";
+import { SocialLogin } from "components";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const SignUp = () => {
     <Container>
       <h1>Sign Up</h1>
       <UserForm formHandler={formHandler} buttonTitle="Sign Up" showName />
-      {/* Google OAuth */}
+      <SocialLogin />
       <GreenLink to="/sign-in">Sign In Instead</GreenLink>
     </Container>
   );
