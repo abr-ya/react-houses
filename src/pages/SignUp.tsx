@@ -1,17 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import UserForm from "components/UserForm/UserForm";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
-import { db } from "../services/firebase";
 import { toast } from "react-toastify";
+import { db } from "../services/firebase";
 import { topRight3sec } from "utils/toastOptions";
+import { SocialLogin, UserForm } from "components";
 import { Container, GreenLink } from "components/Common.styled";
-import { SocialLogin } from "components";
 
 const SignUp = () => {
   const navigate = useNavigate();
 
   const formHandler = async ({ name, email, pass }) => {
+    console.log("SignUp", email, pass);
+
     try {
       const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
@@ -35,7 +36,7 @@ const SignUp = () => {
     <Container>
       <h1>Sign Up</h1>
       <UserForm formHandler={formHandler} buttonTitle="Sign Up" showName />
-      <SocialLogin />
+      <SocialLogin text="Register with Google:" />
       <GreenLink to="/sign-in">Sign In Instead</GreenLink>
     </Container>
   );

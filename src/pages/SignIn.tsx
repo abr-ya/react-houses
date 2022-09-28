@@ -3,8 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { topRight3sec } from "utils/toastOptions";
 import { Container, GreenLink } from "components/Common.styled";
-import UserForm from "components/UserForm/UserForm";
-import { SocialLogin } from "components";
+import { SocialLogin, UserForm } from "components";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const SignIn = () => {
     <Container>
       <h1>Sign In</h1>
       <UserForm formHandler={formHandler} buttonTitle="Sign In" />
-      <SocialLogin />
+      <SocialLogin text="Login with Google:" />
       <GreenLink to="/sign-up">Sign Up Instead</GreenLink>
       <GreenLink to="/forgot">Forgot Password?</GreenLink>
     </Container>
