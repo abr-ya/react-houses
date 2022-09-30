@@ -1,4 +1,4 @@
-import { Container, GreenLink } from "components/Common.styled";
+import { Container, GreenLink, PageHeader } from "components/Common.styled";
 import RestoreForm from "components/UserForm/RestoreForm";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
   return (
     <Container>
-      <h1>Forgot Password</h1>
+      <PageHeader>Forgot Password</PageHeader>
       <RestoreForm formHandler={formHandler} buttonTitle="Send Reset Link" />
       <GreenLink to="/sign-in">Sign In</GreenLink>
     </Container>

@@ -33,6 +33,11 @@ const GlobalStyle = createGlobalStyle`
 
 export default GlobalStyle;
 
+export const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Container = styled.div`
   margin: 2rem;
   padding: 0;
@@ -40,6 +45,11 @@ export const Container = styled.div`
   @media (min-width: 1024px) {
     margin: 3rem;
   }
+`;
+
+export const PageHeader = styled.h1`
+  font-size: 2rem;
+  font-weight: 800;
 `;
 
 export const Card = styled.div`

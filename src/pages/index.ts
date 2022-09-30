@@ -5,6 +5,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import ForgotPassword from "./ForgotPassword";
 import Profile from "./Profile";
+import Category from "./Category";
 import Error404 from "./Error404";
 
-export { About, Home, Error404, Offers, SignIn, SignUp, ForgotPassword, Profile };
+export { About, Home, Error404, Offers, SignIn, SignUp, ForgotPassword, Profile, Category };

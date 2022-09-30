@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { topRight3sec } from "utils/toastOptions";
-import { Container, GreenLink } from "components/Common.styled";
+import { Container, GreenLink, PageHeader } from "components/Common.styled";
 import { SocialLogin, UserForm } from "components";
 
 const SignIn = () => {
@@ -23,7 +23,7 @@ const SignIn = () => {
 
   return (
     <Container>
-      <h1>Sign In</h1>
+      <PageHeader>Sign In</PageHeader>
       <UserForm formHandler={formHandler} buttonTitle="Sign In" />
       <SocialLogin text="Login with Google:" />
       <GreenLink to="/sign-up">Sign Up Instead</GreenLink>
