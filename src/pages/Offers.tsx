@@ -1,9 +1,20 @@
-import { Container } from "components/Common.styled";
+import { Container, Main, PageHeader } from "components/Common.styled";
+import { HouseList } from "components/";
+import { WhereFilterOp } from "firebase/firestore";
 
 const Offers = () => {
+  const whereArgs = {
+    field: "offer",
+    opt: "==" as WhereFilterOp,
+    value: true,
+  };
+
   return (
     <Container>
-      <h1>Offers</h1>
+      <PageHeader>Offers</PageHeader>
+      <Main>
+        <HouseList title={"offers"} whereArgs={whereArgs} />
+      </Main>
     </Container>
   );
 };

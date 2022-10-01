@@ -9,7 +9,7 @@ interface IHouseList {
   whereArgs: {
     field: string;
     opt: WhereFilterOp;
-    value: string;
+    value: string | boolean;
   };
 }
 
