@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { toast } from "react-toastify";
-import Loader from "components/Loader/Loader";
+import { HouseCard, Loader } from "components/";
 
 const Category = () => {
   const [houses, setHouses] = useState(null);
@@ -41,7 +41,13 @@ const Category = () => {
     if (loading) return <Loader />;
     if (!houses?.length) return <p>category is empty</p>;
 
-    return <p>Дома!</p>;
+    return (
+      <ul className="categoryListings">
+        {houses.map((item) => (
+          <HouseCard house={item.data} id={item.id} key={item.id} onDelete={() => console.log("Del!")} />
+        ))}
+      </ul>
+    );
   };
 
   return (
