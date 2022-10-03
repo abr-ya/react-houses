@@ -1,0 +1,71 @@
+button {
+  cursor: pointer;
+}
+
+.formButtons {
+  display: flex;
+}
+
+.formButton,
+.formInput,
+.formInputAddress,
+.formInputName,
+.formInputSmall,
+.formInputFile,
+.formButtonActive {
+  padding: 0.9rem 3rem;
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formButtonActive {
+  background-color: #00cc66;
+  color: #ffffff;
+}
+
+.flex {
+  display: flex;
+}
+
+.formInput,
+.formInputAddress,
+.formInputName,
+.formInputSmall,
+.formInputFile {
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+}
+.formInputSmall,
+.formInputFile {
+  margin-right: 3rem;
+  padding: 0.9rem 0.7rem;
+  text-align: center;
+}
+
+.formInputName {
+  padding: 0.9rem 1rem;
+  width: 90%;
+  max-width: 326px;
+}
+
+.formInputAddress {
+  padding: 0.9rem 1rem;
+  width: 90%;
+  max-width: 326px;
+}
+
+.formPriceDiv {
+  display: flex;
+  align-items: center;
+}
+
+.formPriceText {
+  margin-left: -1.5rem;
+  font-weight: 600;
+}

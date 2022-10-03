@@ -41,6 +41,8 @@ export const Main = styled.main`
 export const Container = styled.div`
   margin: 2rem;
   padding: 0;
+  height: calc(100vh - 115px);
+  overflow: auto;
 
   @media (min-width: 1024px) {
     margin: 3rem;

@@ -4,7 +4,7 @@ import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Container } from "components/Common.styled";
+import { Container, GreenLink } from "components/Common.styled";
 import { LogoutButton, ProfileHeader } from "./Profile.styled";
 import "./temp/profile.css";
 
@@ -92,6 +92,7 @@ const Profile = () => {
             />
           </form>
         </div>
+        <GreenLink to="/add">Add House</GreenLink>
       </main>
     </Container>
   );
