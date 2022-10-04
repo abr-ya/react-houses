@@ -1,20 +1,25 @@
 import { useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { HouseForm } from "components";
+import { HouseForm, Loader } from "components";
 import { Container, Main, PageHeader } from "components/Common.styled";
 import { IHouseFormData } from "components/HouseForm/HouseForm";
 import { uploadFile } from "services/firestore";
+import { db } from "services/firebase";
 
 const AddHouse = () => {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
   const geolocationEnabled = true;
 
   const createHandler = async (data: IHouseFormData) => {
     console.log(data);
     const { discountedPrice, regularPrice, images, latitude, longitude, address } = data;
-    setLoading(true);
+    setLoading(true); // можно ставить после "быстрых проверок"
 
-    if (discountedPrice >= regularPrice) {
+    if (Number(discountedPrice) >= Number(regularPrice)) {
       setLoading(false);
       toast.error("Discounted price needs to be less than regular price");
       return;
@@ -31,6 +36,11 @@ const AddHouse = () => {
     let location;
     if (geolocationEnabled) {
       console.log(`Здесь когда-нибудь будет геокодинг с использованием адреса: ${address}`);
+
+      // а пока что заглушка - такая же, как и "выключенном состоянии"
+      geolocation.lat = latitude;
+      geolocation.lng = longitude;
+      location = address;
     } else {
       geolocation.lat = latitude;
       geolocation.lng = longitude;
@@ -43,10 +53,31 @@ const AddHouse = () => {
       return;
     });
 
-    console.log(imgUrls);
+    if (imgUrls) {
+      const allData = {
+        ...data,
+        imgUrls,
+        geolocation,
+        location,
+        timestamp: serverTimestamp(),
+      };
 
-    setLoading(false);
+      delete allData.images;
+      delete allData.address;
+      !allData.offer && delete allData.discountedPrice;
+
+      console.log(`Сохраняем данные ${allData}`);
+      const docRef = await addDoc(collection(db, "listings"), allData);
+
+      setLoading(false);
+      toast.success(`House saved with ID ${docRef.id}`);
+      navigate(`/category/${allData.type}/${docRef.id}`);
+    } else {
+      console.log("Нет изображений - прерываю поток!");
+    }
   };
+
+  if (loading) return <Loader />;
 
   return (
     <Container>
