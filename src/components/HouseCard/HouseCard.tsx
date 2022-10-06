@@ -20,6 +20,7 @@ interface IHouseCard {
 }
 
 const HouseCard = ({ house, id, onDelete }: IHouseCard) => {
+  console.log("card", id, house);
   const renderPrice = () => `$ ${formatPrice(
     house.offer ? house.discountedPrice.toString() : house.regularPrice.toString(),
   )}
@@ -31,10 +32,16 @@ const HouseCard = ({ house, id, onDelete }: IHouseCard) => {
     return null;
   };
 
+  const renderImg = () => {
+    if (!house?.imageUrls || !Array.isArray(house.imageUrls)) return <span>ошибка изображения</span>;
+
+    return <HouseImg src={house.imageUrls[0]} alt={house.name} />;
+  };
+
   return (
     <StyledHouseCard>
-      <DetailLink to={`/category/${house.type}/${id}`}>
-        <HouseImg src={house.imageUrls[0]} alt={house.name} />
+      <DetailLink to={`/category/${house?.type}/${id}`}>
+        {renderImg()}
         <HouseInfo>
           <TextLocation>{house.location}</TextLocation>
           <TextName>{house.name}</TextName>

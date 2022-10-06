@@ -47,16 +47,16 @@ const AddHouse = () => {
       location = address;
     }
 
-    const imgUrls = await Promise.all([...images].map((image) => uploadFile(image))).catch(() => {
+    const imageUrls = await Promise.all([...images].map((image) => uploadFile(image))).catch(() => {
       setLoading(false);
       toast.error("Images not uploaded");
       return;
     });
 
-    if (imgUrls) {
+    if (imageUrls) {
       const allData = {
         ...data,
-        imgUrls,
+        imageUrls,
         geolocation,
         location,
         timestamp: serverTimestamp(),
