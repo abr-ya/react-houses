@@ -5,7 +5,7 @@ import { WhereFilterOp } from "firebase/firestore";
 
 const Category = () => {
   const params = useParams();
-  const { categoryName: category } = params;
+  const { category } = params;
 
   const whereArgs = {
     field: "type",

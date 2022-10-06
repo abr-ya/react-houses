@@ -3,7 +3,19 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GlobalStyle from "./components/Common.styled";
 import PrivateRoute from "./components/PrivateRoute";
-import { Home, About, Error404, Offers, SignIn, SignUp, Profile, ForgotPassword, Category, AddHouse } from "./pages";
+import {
+  Home,
+  About,
+  Error404,
+  Offers,
+  SignIn,
+  SignUp,
+  Profile,
+  ForgotPassword,
+  Category,
+  AddHouse,
+  House,
+} from "./pages";
 import Navbar from "components/Navbar/Navbar";
 
 const App = () => (
@@ -12,12 +24,13 @@ const App = () => (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/category/:categoryName" element={<Category />} />
+        <Route path="/category/:category" element={<Category />} />
         <Route path="offers" element={<Offers />} />
         <Route path="/profile" element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="add" element={<AddHouse />} />
+        <Route path="/category/:category/:id" element={<House />} />
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="forgot" element={<ForgotPassword />} />

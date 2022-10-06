@@ -72,7 +72,7 @@ export const RoomsText = styled.div`
 export const IconsCorner = styled.div`
   position: absolute;
   top: -3%;
-  right: -2%;
+  right: 0;
 
   & > svg {
     cursor: pointer;

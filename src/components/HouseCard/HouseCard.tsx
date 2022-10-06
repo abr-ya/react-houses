@@ -20,7 +20,6 @@ interface IHouseCard {
 }
 
 const HouseCard = ({ house, id, onDelete }: IHouseCard) => {
-  console.log("card", id, house);
   const renderPrice = () => `$ ${formatPrice(
     house.offer ? house.discountedPrice.toString() : house.regularPrice.toString(),
   )}
