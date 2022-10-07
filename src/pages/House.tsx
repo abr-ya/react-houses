@@ -9,7 +9,7 @@ const House = () => {
   const [house, setHouse] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { category, id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     const getHouse = async () => {
@@ -28,7 +28,12 @@ const House = () => {
   const renderMain = () => {
     if (loading) return <Loader />;
 
-    return <HouseDetail data={house} />;
+    return (
+      <>
+        <p>здесь будет слайдер</p>
+        <HouseDetail data={house} />
+      </>
+    );
   };
 
   return (
