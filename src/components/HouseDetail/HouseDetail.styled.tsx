@@ -19,25 +19,29 @@ export const LocationText = styled.p`
   font-weight: 600;
 `;
 
-export const TypeText = styled.p`
+export const BadgesBlock = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.5rem 0;
+`;
+
+export const TypeBadge = styled.div`
   padding: 0.25rem 0.5rem;
   background-color: #00cc66;
   color: #ffffff;
   border-radius: 2rem;
-  display: inline;
-  font-weight: 600;
   font-size: 0.8rem;
+  font-weight: 600;
   margin-right: 1rem;
 `;
 
-export const DiscountText = styled.p`
+export const DiscountBadge = styled.div`
   padding: 0.25rem 0.5rem;
   background-color: #000000;
   color: #ffffff;
-  border-radius: 1rem;
+  border-radius: 2rem;
   font-size: 0.8rem;
   font-weight: 600;
-  display: inline;
 `;
 
 export const OptionsList = styled.ul`

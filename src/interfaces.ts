@@ -7,7 +7,7 @@ export interface IUser {
   email: string;
 }
 
-interface ICoord {
+export interface ICoord {
   lat: number;
   long: number;
 }

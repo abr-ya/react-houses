@@ -1,10 +1,11 @@
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getNowString } from "utils/formats";
 
 // Upload File to Firestore
 export const uploadFile = async (file, prefix = "load", folder = "images") => {
   return new Promise((resolve, reject) => {
     const storage = getStorage();
-    const fileName = `${prefix}_${+new Date()}_${file.name}`;
+    const fileName = `${prefix}_${getNowString()}_${file.name}`;
     const storageRef = ref(storage, `${folder}/${fileName}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 

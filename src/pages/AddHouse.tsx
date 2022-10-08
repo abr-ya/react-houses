@@ -7,6 +7,7 @@ import { Container, Main, PageHeader } from "components/Common.styled";
 import { IHouseFormData } from "components/HouseForm/HouseForm";
 import { uploadFile } from "services/firestore";
 import { db } from "services/firebase";
+import { ICoord } from "interfaces";
 
 const AddHouse = () => {
   const navigate = useNavigate();
@@ -17,9 +18,9 @@ const AddHouse = () => {
   const createHandler = async (data: IHouseFormData) => {
     console.log(data);
     const { discountedPrice, regularPrice, images, latitude, longitude, address } = data;
-    setLoading(true); // можно ставить после "быстрых проверок"
 
-    if (Number(discountedPrice) >= Number(regularPrice)) {
+    // быстрые проверки
+    if (discountedPrice >= regularPrice) {
       setLoading(false);
       toast.error("Discounted price needs to be less than regular price");
       return;
@@ -29,9 +30,11 @@ const AddHouse = () => {
       toast.error("Max 6 images");
       return;
     }
-    const geolocation = {
+
+    setLoading(true);
+    const geolocation: ICoord = {
       lat: 0,
-      lng: 0,
+      long: 0,
     };
     let location;
     if (geolocationEnabled) {
@@ -39,17 +42,18 @@ const AddHouse = () => {
 
       // а пока что заглушка - такая же, как и "выключенном состоянии"
       geolocation.lat = latitude;
-      geolocation.lng = longitude;
+      geolocation.long = longitude;
       location = address;
     } else {
       geolocation.lat = latitude;
-      geolocation.lng = longitude;
+      geolocation.long = longitude;
       location = address;
     }
 
-    const imageUrls = await Promise.all([...images].map((image) => uploadFile(image))).catch(() => {
+    const imageUrls = await Promise.all([...images].map((image) => uploadFile(image))).catch((err) => {
       setLoading(false);
-      toast.error("Images not uploaded");
+      console.log("Images uploaded error: ", err);
+      toast.error("Images uploaded error!");
       return;
     });
 
@@ -81,7 +85,7 @@ const AddHouse = () => {
 
   return (
     <Container>
-      <PageHeader>AddHouse</PageHeader>
+      <PageHeader>Add House</PageHeader>
       <Main>
         <HouseForm submitHandler={createHandler} />
       </Main>

@@ -60,24 +60,23 @@ const HouseForm = ({ submitHandler }: IHouseForm) => {
   };
 
   const formChangeHandler = (e) => {
-    let boolean = null;
-    if (e.target.value === "true") boolean = true;
-    if (e.target.value === "false") boolean = false;
-
     // Files
     if (e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
         images: e.target.files,
       }));
-    }
+    } else {
+      const numFields = ["bedrooms", "bathrooms", "regularPrice", "discountedPrice", "latitude", "longitude"];
+      const { id, value: rawValue } = e.target;
+      const value = numFields.includes(id) ? Number(rawValue) : rawValue;
 
-    // Text/Booleans/Numbers
-    if (!e.target.files) {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.id]: boolean ?? e.target.value,
-      }));
+      let boolean = null;
+      if (value === "true") boolean = true;
+      if (value === "false") boolean = false;
+
+      // Text/Booleans/Numbers
+      setFormData((prev) => ({ ...prev, [id]: boolean ?? value }));
     }
   };
 
@@ -264,7 +263,15 @@ const HouseForm = ({ submitHandler }: IHouseForm) => {
 
       <StyledLabel>Images</StyledLabel>
       <ImagesComment>The first image will be the cover (max 6).</ImagesComment>
-      <FileInput type="file" id="images" onChange={formChangeHandler} max="6" accept=".jpg,.png,.jpeg" multiple />
+      <FileInput
+        type="file"
+        id="images"
+        onChange={formChangeHandler}
+        max="6"
+        accept=".jpg,.png,.jpeg"
+        multiple
+        required
+      />
       <CreateButton type="submit">Create House</CreateButton>
     </form>
   );

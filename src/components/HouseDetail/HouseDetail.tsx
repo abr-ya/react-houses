@@ -1,14 +1,15 @@
 import { IHouse } from "interfaces";
-import { formatPrice } from "utils/formats";
+import { formatPrice, formatRooms } from "utils/formats";
 import {
-  DiscountText,
+  BadgesBlock,
+  DiscountBadge,
   LocationHeader,
   LocationText,
   NameHeader,
   OptionsList,
   OptionsListItem,
   StyledHouseDetail,
-  TypeText,
+  TypeBadge,
 } from "./HouseDetail.styled";
 
 interface IHouseDetail {
@@ -23,12 +24,13 @@ const HouseDetail = ({ data }: IHouseDetail) => {
     <StyledHouseDetail>
       <NameHeader>{`${name} - $${price}`}</NameHeader>
       <LocationText>{location}</LocationText>
-      <TypeText>For {type === "rent" ? "Rent" : "Sale"}</TypeText>
-      {offer && <DiscountText>${regularPrice - discountedPrice} discount</DiscountText>}
-
+      <BadgesBlock>
+        <TypeBadge>For {type === "rent" ? "Rent" : "Sale"}</TypeBadge>
+        {offer && <DiscountBadge>${regularPrice - discountedPrice} discount</DiscountBadge>}
+      </BadgesBlock>
       <OptionsList>
-        <OptionsListItem>{bedrooms > 1 ? `${bedrooms} Bedrooms` : "1 Bedroom"}</OptionsListItem>
-        <OptionsListItem>{bathrooms > 1 ? `${bathrooms} Bathrooms` : "1 Bathroom"}</OptionsListItem>
+        <OptionsListItem>{formatRooms(bedrooms, "Bedroom")}</OptionsListItem>
+        <OptionsListItem>{formatRooms(bathrooms, "Bathroom")}</OptionsListItem>
         <OptionsListItem>{parking && "Parking Spot"}</OptionsListItem>
         <OptionsListItem>{furnished && "Furnished"}</OptionsListItem>
       </OptionsList>

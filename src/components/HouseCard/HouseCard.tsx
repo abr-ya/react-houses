@@ -23,7 +23,7 @@ const HouseCard = ({ house, id, onDelete }: IHouseCard) => {
   const renderPrice = () => `$ ${formatPrice(
     house.offer ? house.discountedPrice.toString() : house.regularPrice.toString(),
   )}
-  ${house.type === "rent" && " / Month"}`;
+  ${house.type === "rent" ? " / Month" : ""}`;
 
   const renderIcons = () => {
     if (onDelete) return <DeleteIcon className="removeIcon" fill="rgb(231, 76,60)" onClick={onDelete} />;
