@@ -15,6 +15,7 @@ import {
   Category,
   AddHouse,
   House,
+  Contact,
 } from "./pages";
 import Navbar from "components/Navbar/Navbar";
 
@@ -31,6 +32,7 @@ const App = () => (
         </Route>
         <Route path="add" element={<AddHouse />} />
         <Route path="/category/:category/:id" element={<House />} />
+        <Route path="/contact/:id" element={<Contact />} />
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="forgot" element={<ForgotPassword />} />

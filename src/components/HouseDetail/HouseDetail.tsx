@@ -36,9 +36,6 @@ const HouseDetail = ({ data }: IHouseDetail) => {
       </OptionsList>
 
       <LocationHeader>Location</LocationHeader>
-
-      {/* MAP */}
-      {/* CONTACT LINK */}
     </StyledHouseDetail>
   );
 };

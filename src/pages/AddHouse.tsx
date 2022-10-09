@@ -8,12 +8,15 @@ import { IHouseFormData } from "components/HouseForm/HouseForm";
 import { uploadFile } from "services/firestore";
 import { db } from "services/firebase";
 import { ICoord } from "interfaces";
+import { getAuth } from "firebase/auth";
 
 const AddHouse = () => {
   const navigate = useNavigate();
+  const auth = getAuth();
 
   const [loading, setLoading] = useState(false);
   const geolocationEnabled = true;
+  const uid = auth.currentUser?.uid;
 
   const createHandler = async (data: IHouseFormData) => {
     console.log(data);
@@ -60,6 +63,7 @@ const AddHouse = () => {
     if (imageUrls) {
       const allData = {
         ...data,
+        uid,
         imageUrls,
         geolocation,
         location,

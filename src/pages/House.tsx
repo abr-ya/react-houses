@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Container, Main, PageHeader } from "components/Common.styled";
+import { Container, GreenLink, Main, PageHeader } from "components/Common.styled";
 import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { db } from "services/firebase";
 import { HouseDetail, Loader } from "components";
 
@@ -10,6 +11,9 @@ const House = () => {
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
+  const auth = getAuth();
+  // используются для проверки, показывать ссылкуна контакт или нет
+  console.log("house, user, house.uid:", auth.currentUser?.uid, house?.uid);
 
   useEffect(() => {
     const getHouse = async () => {
@@ -32,6 +36,11 @@ const House = () => {
       <>
         <p>здесь будет слайдер</p>
         <HouseDetail data={house} />
+        {/* MAP */}
+        {/* CONTACT LINK */}
+        {auth.currentUser?.uid !== house?.uid && (
+          <GreenLink to={`/contact/${house.uid}?name=${house.name}`}>Contact Landlord</GreenLink>
+        )}
       </>
     );
   };
