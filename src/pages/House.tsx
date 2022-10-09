@@ -4,10 +4,11 @@ import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "services/firebase";
-import { HouseDetail, Loader } from "components";
+import { HouseDetail, Loader, PinOnMapLeaflet } from "components";
+import { IHouse } from "interfaces";
 
 const House = () => {
-  const [house, setHouse] = useState(null);
+  const [house, setHouse] = useState<IHouse | null>(null);
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
@@ -21,7 +22,7 @@ const House = () => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setHouse(docSnap.data());
+        setHouse(docSnap.data() as IHouse);
         setLoading(false);
       }
     };
@@ -34,10 +35,15 @@ const House = () => {
 
     return (
       <>
-        <p>здесь будет слайдер</p>
-        <HouseDetail data={house} />
-        {/* MAP */}
-        {/* CONTACT LINK */}
+        <Container>
+          <p>здесь будет слайдер</p>
+          <HouseDetail data={house} />
+        </Container>
+        <PinOnMapLeaflet
+          size={{ height: "400px", width: "100%" }}
+          coord={house.geolocation}
+          pinTitle={house.location}
+        />
         {auth.currentUser?.uid !== house?.uid && (
           <GreenLink to={`/contact/${house.uid}?name=${house.name}`}>Contact Landlord</GreenLink>
         )}
@@ -46,10 +52,10 @@ const House = () => {
   };
 
   return (
-    <Container>
+    <>
       <PageHeader>House</PageHeader>
       <Main>{renderMain()}</Main>
-    </Container>
+    </>
   );
 };
 

@@ -19,12 +19,12 @@ export interface IHouse {
   furnished: boolean;
   geolocation: ICoord;
   imageUrls: string[];
-  location: number;
+  location: string;
   name: number;
   offer: boolean;
   parking: boolean;
   regularPrice: number;
   timestamp: FieldValue;
   type: string;
-  userRef: string;
+  uid: string;
 }

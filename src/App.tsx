@@ -18,6 +18,7 @@ import {
   Contact,
 } from "./pages";
 import Navbar from "components/Navbar/Navbar";
+import Test from "pages/Test";
 
 const App = () => (
   <>
@@ -37,6 +38,7 @@ const App = () => (
         <Route path="sign-up" element={<SignUp />} />
         <Route path="forgot" element={<ForgotPassword />} />
         <Route path="about" element={<About />} />
+        <Route path="test" element={<Test />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Navbar />

@@ -33,20 +33,19 @@ const GlobalStyle = createGlobalStyle`
 
 export default GlobalStyle;
 
+export const Container = styled.div`
+  margin: 0 2rem;
+  padding: 0;
+
+  @media (min-width: 1024px) {
+    margin: 0 3rem;
+  }
+`;
+
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
-`;
-
-export const Container = styled.div`
-  margin: 2rem;
-  padding: 0;
-  height: calc(100vh - 115px);
-  overflow: auto;
-
-  @media (min-width: 1024px) {
-    margin: 3rem;
-  }
+  margin-bottom: 100px; // высота фиксированного футера + 15px
 `;
 
 export const PageHeaderFlex = styled.header`
