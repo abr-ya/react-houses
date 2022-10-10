@@ -1,3 +1,4 @@
+import { HouseSlider } from "components";
 import { Container, Main, PageHeader } from "../components/Common.styled";
 import { CategoryBlockTitle, CategoryImg, CategoryLink, CategoryNav, CategoryTitle } from "./Home.styled";
 
@@ -5,7 +6,7 @@ const Home = () => (
   <Container>
     <PageHeader>Explore</PageHeader>
     <Main>
-      {/* Slider */}
+      <HouseSlider />
       <CategoryBlockTitle>Categories</CategoryBlockTitle>
       <CategoryNav>
         <CategoryLink to="/category/rent">
