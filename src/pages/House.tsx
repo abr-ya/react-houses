@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "services/firebase";
-import { HouseDetail, Loader, PinOnMapLeaflet } from "components";
+import { HouseDetail, Loader, PinOnMapLeaflet, SliderSwiper6 } from "components";
 import { IHouse } from "interfaces";
 
 const House = () => {
@@ -35,8 +35,8 @@ const House = () => {
 
     return (
       <>
+        {house?.imageUrls ? <SliderSwiper6 imgArray={house.imageUrls} height={300} /> : null}
         <Container>
-          <p>здесь будет слайдер</p>
           <HouseDetail data={house} />
         </Container>
         <PinOnMapLeaflet
