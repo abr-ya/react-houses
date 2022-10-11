@@ -54,9 +54,3 @@ export const OptionsListItem = styled.li`
   font-weight: 500;
   opacity: 0.8;
 `;
-
-export const LocationHeader = styled.h3`
-  margin-top: 2rem;
-  font-weight: 600;
-  font-size: 1.25rem;
-`;

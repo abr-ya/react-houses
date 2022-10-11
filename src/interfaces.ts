@@ -26,5 +26,5 @@ export interface IHouse {
   regularPrice: number;
   timestamp: FieldValue;
   type: string;
-  uid: string;
+  userRef: string;
 }

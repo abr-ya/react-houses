@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, GreenLink, Main, PageHeader } from "components/Common.styled";
+import { Container, GreenLink, Main, PageHeader, SectionHeader } from "components/Common.styled";
 import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -14,7 +14,7 @@ const House = () => {
   const { id } = useParams();
   const auth = getAuth();
   // используются для проверки, показывать ссылкуна контакт или нет
-  console.log("house, user, house.uid:", auth.currentUser?.uid, house?.uid);
+  console.log("house, user, house.userRef:", auth.currentUser?.uid, house?.userRef);
 
   useEffect(() => {
     const getHouse = async () => {
@@ -38,14 +38,15 @@ const House = () => {
         {house?.imageUrls ? <SliderSwiper6 imgArray={house.imageUrls} height={300} /> : null}
         <Container>
           <HouseDetail data={house} />
+          <SectionHeader>Location</SectionHeader>
         </Container>
         <PinOnMapLeaflet
           size={{ height: "400px", width: "100%" }}
           coord={house.geolocation}
           pinTitle={house.location}
         />
-        {auth.currentUser?.uid !== house?.uid && (
-          <GreenLink to={`/contact/${house.uid}?name=${house.name}`}>Contact Landlord</GreenLink>
+        {auth.currentUser?.uid !== house?.userRef && (
+          <GreenLink to={`/contact/${house.userRef}?name=${house.name}`}>Contact Landlord</GreenLink>
         )}
       </>
     );

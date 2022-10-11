@@ -3,7 +3,6 @@ import { formatPrice, formatRooms } from "utils/formats";
 import {
   BadgesBlock,
   DiscountBadge,
-  LocationHeader,
   LocationText,
   NameHeader,
   OptionsList,
@@ -34,8 +33,6 @@ const HouseDetail = ({ data }: IHouseDetail) => {
         <OptionsListItem>{parking && "Parking Spot"}</OptionsListItem>
         <OptionsListItem>{furnished && "Furnished"}</OptionsListItem>
       </OptionsList>
-
-      <LocationHeader>Location</LocationHeader>
     </StyledHouseDetail>
   );
 };

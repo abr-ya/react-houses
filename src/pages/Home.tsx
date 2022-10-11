@@ -1,13 +1,14 @@
 import { HouseSlider } from "components";
-import { Container, Main, PageHeader } from "../components/Common.styled";
-import { CategoryBlockTitle, CategoryImg, CategoryLink, CategoryNav, CategoryTitle } from "./Home.styled";
+import { Container, Main, PageHeader, SectionHeader } from "../components/Common.styled";
+import { CategoryImg, CategoryLink, CategoryNav, CategoryTitle } from "./Home.styled";
 
 const Home = () => (
   <Container>
     <PageHeader>Explore</PageHeader>
     <Main>
+      <SectionHeader>Last Houses</SectionHeader>
       <HouseSlider />
-      <CategoryBlockTitle>Categories</CategoryBlockTitle>
+      <SectionHeader>Categories</SectionHeader>
       <CategoryNav>
         <CategoryLink to="/category/rent">
           <CategoryImg src="/img/rentCategoryImage.jpg" alt="rent" />

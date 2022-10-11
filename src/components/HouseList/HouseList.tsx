@@ -42,6 +42,16 @@ const HouseList = ({ title, whereArgs: { field, opt, value } }: IHouseList) => {
     fetchHouses();
   }, []);
 
+  const protectedList = ["84E5bi5O3ETRt5tnWiVg", "dIBr72cXA0WYPHaUzFrQ"];
+  const deleteHandler = (id) => {
+    if (protectedList.includes(id)) {
+      toast.error("House is in Protected List");
+    } else {
+      console.log("Delete!", id);
+      toast.info(`Delete function for ${id} will be there soon!`);
+    }
+  };
+
   if (loading) return <Loader />;
 
   if (!houses?.length) return <p>{title} is empty</p>;
@@ -49,7 +59,7 @@ const HouseList = ({ title, whereArgs: { field, opt, value } }: IHouseList) => {
   return (
     <ul>
       {houses.map((item) => (
-        <HouseCard house={item.data} id={item.id} key={item.id} onDelete={() => console.log("Del!")} />
+        <HouseCard house={item.data} id={item.id} key={item.id} onDelete={() => deleteHandler(item.id)} />
       ))}
     </ul>
   );

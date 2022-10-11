@@ -52,11 +52,23 @@ export const PageHeaderFlex = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 2rem;
+
+  @media (min-width: 1024px) {
+    margin: 0 3rem;
+  }
 `;
 
 export const PageHeader = styled.h1`
+  margin: 1rem 0;
   font-size: 2rem;
   font-weight: 800;
+`;
+
+export const SectionHeader = styled.h2`
+  margin: 1rem 0;
+  font-weight: 600;
+  font-size: 1.25rem;
 `;
 
 export const SmallButton = styled.button`

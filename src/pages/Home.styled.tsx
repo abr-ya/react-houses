@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components/macro";
 
-export const CategoryBlockTitle = styled.div`
-  font-weight: 700;
-  margin: 1rem 0;
-`;
-
 export const CategoryNav = styled.div`
   display: flex;
   justify-content: space-between;

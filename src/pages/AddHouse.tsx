@@ -16,7 +16,7 @@ const AddHouse = () => {
 
   const [loading, setLoading] = useState(false);
   const geolocationEnabled = true;
-  const uid = auth.currentUser?.uid;
+  const userRef = auth.currentUser?.uid;
 
   const createHandler = async (data: IHouseFormData) => {
     console.log(data);
@@ -63,7 +63,7 @@ const AddHouse = () => {
     if (imageUrls) {
       const allData = {
         ...data,
-        uid,
+        userRef,
         imageUrls,
         geolocation,
         location,
