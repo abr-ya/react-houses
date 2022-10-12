@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import { Container, GreenLink, Main, PageHeader, SectionHeader } from "components/Common.styled";
 import { useParams } from "react-router-dom";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "services/firebase";
-import { HouseDetail, Loader, PinOnMapLeaflet, SliderSwiper6 } from "components";
+import { HouseDetail, ImageForm, Loader, PinOnMapLeaflet, SliderSwiper6 } from "components";
 import { IHouse } from "interfaces";
+import { IImageFormData } from "components/HouseForm/ImageForm";
+import { toast } from "react-toastify";
+import { uploadFile } from "services/firestore";
 
 const House = () => {
   const [house, setHouse] = useState<IHouse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [imgLoading, setImgLoading] = useState(false);
 
   const { id } = useParams();
   const auth = getAuth();
   const isMy = auth.currentUser?.uid && auth.currentUser?.uid === house?.userRef;
+  const hasImages = house?.imageUrls;
   console.log("house, isMy?:", isMy);
 
   useEffect(() => {
@@ -30,12 +35,53 @@ const House = () => {
     getHouse();
   }, [id]);
 
+  const newImagesHandler = async ({ images }: IImageFormData) => {
+    console.log("Добавляем файлы: ", images);
+    // copy-paste ?! AddHouse ~55
+    let imageUrls = null;
+    if (images) {
+      setImgLoading(true);
+      imageUrls = await Promise.all([...images].map((image) => uploadFile(image))).catch((err) => {
+        setImgLoading(false);
+        console.log("Images uploaded error: ", err);
+        toast.error("Images uploaded error!");
+        return;
+      });
+    }
+
+    if (imageUrls) {
+      // update house
+      const docRef = doc(db, "listings", id);
+      // todo: what about error??
+      await updateDoc(docRef, { imageUrls });
+      setImgLoading(false);
+      toast.success(`Image(s) added to ${house.name} card!`);
+      setHouse((prev) => ({ ...prev, imageUrls }));
+    }
+  };
+
+  const renderImagesBlock = () => {
+    if (imgLoading) return <Loader />;
+
+    if (isMy && !hasImages)
+      return (
+        <Container>
+          <SectionHeader>No images, but you can add some...</SectionHeader>
+          <ImageForm submitHandler={newImagesHandler} />
+        </Container>
+      );
+
+    if (!hasImages) return null;
+
+    return <SliderSwiper6 imgArray={house.imageUrls} height={300} />;
+  };
+
   const renderMain = () => {
     if (loading) return <Loader />;
 
     return (
       <>
-        {house?.imageUrls ? <SliderSwiper6 imgArray={house.imageUrls} height={300} /> : null}
+        {renderImagesBlock()}
         <Container>
           <HouseDetail data={house} />
           <SectionHeader>Location</SectionHeader>

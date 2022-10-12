@@ -77,7 +77,7 @@ const AddHouse = () => {
     if (!imageUrls) delete allData.imageUrls;
     if (!allData.offer) delete allData.discountedPrice;
 
-    console.log(`Сохраняем данные ${allData}`);
+    console.log(`Сохраняем данные ${JSON.stringify(allData)}`);
     // How about Error Message?
     const docRef = await addDoc(collection(db, "listings"), allData);
 

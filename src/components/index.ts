@@ -6,6 +6,7 @@ import HouseCard from "./HouseCard/HouseCard";
 import HouseDetail from "./HouseDetail/HouseDetail";
 import HouseSlider from "./HouseSlider/HouseSlider";
 import HouseForm from "./HouseForm/HouseForm";
+import ImageForm from "./HouseForm/ImageForm";
 import PinOnMapLeaflet from "./PinOnMapLeaflet/PinOnMapLeaflet";
 import SliderSwiper6 from "./SliderSwiper6/SliderSwiper6";
 import SliderSwiper6Data from "./SliderSwiper6/SliderSwiper6Data";
@@ -20,6 +21,7 @@ export {
   HouseDetail,
   HouseSlider,
   HouseForm,
+  ImageForm,
   PinOnMapLeaflet,
   SliderSwiper6,
   SliderSwiper6Data,
