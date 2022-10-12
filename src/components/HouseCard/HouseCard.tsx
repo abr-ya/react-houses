@@ -32,7 +32,7 @@ const HouseCard = ({ house, id, onDelete }: IHouseCard) => {
   };
 
   const renderImg = () => {
-    if (!house?.imageUrls || !Array.isArray(house.imageUrls)) return <span>ошибка изображения</span>;
+    if (!house?.imageUrls || !Array.isArray(house.imageUrls)) return <span>нет изображения</span>;
 
     return <HouseImg src={house.imageUrls[0]} alt={house.name} />;
   };

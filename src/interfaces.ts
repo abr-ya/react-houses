@@ -18,7 +18,7 @@ export interface IHouse {
   discountedPrice: number;
   furnished: boolean;
   geolocation: ICoord;
-  imageUrls: string[];
+  imageUrls?: string[];
   location: string;
   name: number;
   offer: boolean;

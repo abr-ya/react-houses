@@ -13,8 +13,8 @@ const House = () => {
 
   const { id } = useParams();
   const auth = getAuth();
-  // используются для проверки, показывать ссылкуна контакт или нет
-  console.log("house, user, house.userRef:", auth.currentUser?.uid, house?.userRef);
+  const isMy = auth.currentUser?.uid && auth.currentUser?.uid === house?.userRef;
+  console.log("house, isMy?:", isMy);
 
   useEffect(() => {
     const getHouse = async () => {
@@ -45,9 +45,7 @@ const House = () => {
           coord={house.geolocation}
           pinTitle={house.location}
         />
-        {auth.currentUser?.uid !== house?.userRef && (
-          <GreenLink to={`/contact/${house.userRef}?name=${house.name}`}>Contact Landlord</GreenLink>
-        )}
+        {!isMy && <GreenLink to={`/contact/${house.userRef}?name=${house.name}`}>Contact Landlord</GreenLink>}
       </>
     );
   };

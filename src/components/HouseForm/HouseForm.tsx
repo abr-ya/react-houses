@@ -263,15 +263,7 @@ const HouseForm = ({ submitHandler }: IHouseForm) => {
 
       <StyledLabel>Images</StyledLabel>
       <ImagesComment>The first image will be the cover (max 6).</ImagesComment>
-      <FileInput
-        type="file"
-        id="images"
-        onChange={formChangeHandler}
-        max="6"
-        accept=".jpg,.png,.jpeg"
-        multiple
-        required
-      />
+      <FileInput type="file" id="images" onChange={formChangeHandler} max="6" accept=".jpg,.png,.jpeg" multiple />
       <CreateButton type="submit">Create House</CreateButton>
     </form>
   );
