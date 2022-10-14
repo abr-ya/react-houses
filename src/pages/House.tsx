@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, GreenLink, Main, PageHeader, SectionHeader } from "components/Common.styled";
+import { Container, GreenLink, Main, PageHeader, SectionHeader, SmallButton } from "components/Common.styled";
 import { useParams } from "react-router-dom";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -10,11 +10,13 @@ import { IImageFormData } from "components/HouseForm/ImageForm";
 import { toast } from "react-toastify";
 import { uploadFile } from "services/firestore";
 import { dataURIToBlob, resizeImage } from "utils/images";
+import { ControlBlock, SliderWrapper } from "./House.styled";
 
 const House = () => {
   const [house, setHouse] = useState<IHouse | null>(null);
   const [loading, setLoading] = useState(true);
   const [imgLoading, setImgLoading] = useState(false);
+  const [addImgOn, setAddImgOn] = useState(false);
 
   const { id } = useParams();
   const auth = getAuth();
@@ -39,10 +41,10 @@ const House = () => {
   const newImagesHandler = async ({ images }: IImageFormData) => {
     console.log("Добавляем файлы: ", images);
     // copy-paste ?! AddHouse ~55
-    let imageUrls = null;
+    let newImageUrls = null;
     if (images) {
       setImgLoading(true);
-      imageUrls = await Promise.all(
+      newImageUrls = await Promise.all(
         [...images].map(async (image) => {
           if (image.size > 200000) {
             const image2 = await resizeImage({ image, maxSize: 800 });
@@ -61,12 +63,14 @@ const House = () => {
       });
     }
 
-    if (imageUrls) {
+    if (newImageUrls) {
+      const imageUrls = house?.imageUrls ? [...newImageUrls, ...house?.imageUrls] : newImageUrls;
       // update house
       const docRef = doc(db, "listings", id);
       // todo: what about error??
       await updateDoc(docRef, { imageUrls });
       setImgLoading(false);
+      setAddImgOn(false);
       toast.success(`Image(s) added to ${house.name} card!`);
       setHouse((prev) => ({ ...prev, imageUrls }));
     }
@@ -75,17 +79,24 @@ const House = () => {
   const renderImagesBlock = () => {
     if (imgLoading) return <Loader />;
 
-    if (isMy && !hasImages)
+    if ((isMy && !hasImages) || addImgOn)
       return (
         <Container>
-          <SectionHeader>No images, but you can add some...</SectionHeader>
+          <SectionHeader>{addImgOn ? "Add more Images:" : "No images, but you can add some..."}</SectionHeader>
           <ImageForm submitHandler={newImagesHandler} />
         </Container>
       );
 
     if (!hasImages) return null;
 
-    return <SliderSwiper6 imgArray={house.imageUrls} height={300} />;
+    return (
+      <SliderWrapper>
+        <ControlBlock>
+          <SmallButton onClick={() => setAddImgOn(true)}>Add Images</SmallButton>
+        </ControlBlock>
+        <SliderSwiper6 imgArray={house.imageUrls} height={300} />
+      </SliderWrapper>
+    );
   };
 
   const renderMain = () => {

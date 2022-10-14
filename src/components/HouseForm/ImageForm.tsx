@@ -1,5 +1,6 @@
+import { BigButton } from "components/Common.styled";
 import { useState } from "react";
-import { CreateButton, FileInput, ImagesComment, StyledLabel } from "./HouseForm.styled";
+import { FileInput, ImagesComment, StyledLabel } from "./HouseForm.styled";
 
 export interface IImageFormData {
   images: FileList | null;
@@ -35,7 +36,7 @@ const ImageForm = ({ submitHandler }: IImageForm) => {
         multiple
         required
       />
-      <CreateButton type="submit">Upload Images</CreateButton>
+      <BigButton type="submit">Upload Images</BigButton>
     </form>
   );
 };

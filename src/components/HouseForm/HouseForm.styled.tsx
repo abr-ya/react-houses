@@ -26,18 +26,3 @@ export const FileInput = styled.input`
     margin: 1rem;
   }
 `;
-
-export const CreateButton = styled.button`
-  cursor: pointer;
-  background: #00cc66;
-  border-radius: 1rem;
-  padding: 0.85rem 2rem;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1.25rem;
-  width: 80%;
-  margin: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;

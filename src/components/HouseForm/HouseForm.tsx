@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { CreateButton, FileInput, ImagesComment, StyledLabel } from "./HouseForm.styled";
+import { BigButton } from "components/Common.styled";
+import { FileInput, ImagesComment, StyledLabel } from "./HouseForm.styled";
 import "./tempForm.css";
 
 export interface IHouseFormData {
@@ -264,7 +265,7 @@ const HouseForm = ({ submitHandler }: IHouseForm) => {
       <StyledLabel>Images</StyledLabel>
       <ImagesComment>The first image will be the cover (max 6).</ImagesComment>
       <FileInput type="file" id="images" onChange={formChangeHandler} max="6" accept=".jpg,.png,.jpeg" multiple />
-      <CreateButton type="submit">Create House</CreateButton>
+      <BigButton type="submit">Create House</BigButton>
     </form>
   );
 };
