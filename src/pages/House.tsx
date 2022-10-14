@@ -9,6 +9,7 @@ import { IHouse } from "interfaces";
 import { IImageFormData } from "components/HouseForm/ImageForm";
 import { toast } from "react-toastify";
 import { uploadFile } from "services/firestore";
+import { dataURIToBlob, resizeImage } from "utils/images";
 
 const House = () => {
   const [house, setHouse] = useState<IHouse | null>(null);
@@ -41,7 +42,18 @@ const House = () => {
     let imageUrls = null;
     if (images) {
       setImgLoading(true);
-      imageUrls = await Promise.all([...images].map((image) => uploadFile(image))).catch((err) => {
+      imageUrls = await Promise.all(
+        [...images].map(async (image) => {
+          if (image.size > 200000) {
+            const image2 = await resizeImage({ image, maxSize: 800 });
+            const newFile = dataURIToBlob(image2);
+            console.log("resize to:", newFile);
+            return uploadFile(newFile, id);
+          } else {
+            return uploadFile(image, id);
+          }
+        }),
+      ).catch((err) => {
         setImgLoading(false);
         console.log("Images uploaded error: ", err);
         toast.error("Images uploaded error!");

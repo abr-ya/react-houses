@@ -9,6 +9,7 @@ import { uploadFile } from "services/firestore";
 import { db } from "services/firebase";
 import { ICoord } from "interfaces";
 import { getAuth } from "firebase/auth";
+import { dataURIToBlob, resizeImage } from "utils/images";
 
 const AddHouse = () => {
   const navigate = useNavigate();
@@ -54,7 +55,18 @@ const AddHouse = () => {
     // Check and load images
     let imageUrls = null;
     if (images) {
-      imageUrls = await Promise.all([...images].map((image) => uploadFile(image))).catch((err) => {
+      imageUrls = await Promise.all(
+        [...images].map(async (image) => {
+          if (image.size > 200000) {
+            const image2 = await resizeImage({ image, maxSize: 800 });
+            const newFile = dataURIToBlob(image2);
+            console.log("resize to:", newFile);
+            return uploadFile(newFile, "new");
+          } else {
+            return uploadFile(image, "new");
+          }
+        }),
+      ).catch((err) => {
         setLoading(false);
         console.log("Images uploaded error: ", err);
         toast.error("Images uploaded error!");
