@@ -61,6 +61,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "firebase": "^9.10.0",
+    "framer-motion": "^7.5.3",
     "leaflet": "1.7.1",
     "react-image-file-resizer": "^0.4.8",
     "react-leaflet": "3.2.2",

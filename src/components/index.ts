@@ -11,6 +11,7 @@ import PinOnMapLeaflet from "./PinOnMapLeaflet/PinOnMapLeaflet";
 import SliderSwiper6 from "./SliderSwiper6/SliderSwiper6";
 import SliderSwiper6Data from "./SliderSwiper6/SliderSwiper6Data";
 import Loader from "./Loader/Loader";
+import SortingList from "./SortingList/SortingList";
 
 export {
   SocialLogin,
@@ -26,4 +27,5 @@ export {
   SliderSwiper6,
   SliderSwiper6Data,
   Loader,
+  SortingList,
 };

@@ -5,7 +5,7 @@ export const SliderItem = styled.div<{ height: number; bg: string; isLink?: bool
   width: 100%;
   height: ${({ height }) => height}px;
   background: url(${({ bg }) => bg}) center no-repeat;
-  background-size: "cover";
+  background-size: cover;
   cursor: ${({ isLink }) => (isLink ? "pointer" : "all-scroll")};
 `;
 
