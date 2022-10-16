@@ -86,15 +86,20 @@ export const BigButton = styled.button`
   justify-content: center;
 `;
 
-export const SmallButton = styled.button`
+export const SmallButton = styled.button<{ color?: string }>`
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: #00cc66;
+  background-color: ${({ color }) => (color ? color : "#00cc66")};
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;
 
 export const Card = styled.div`

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Container, GreenLink, Main, PageHeader, SectionHeader, SmallButton } from "components/Common.styled";
+import { Container, Flex, GreenLink, Main, PageHeader, SectionHeader, SmallButton } from "components/Common.styled";
 import { useParams } from "react-router-dom";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "services/firebase";
-import { HouseDetail, ImageForm, Loader, PinOnMapLeaflet, SliderSwiper6 } from "components";
+import { HouseDetail, ImageForm, Loader, PinOnMapLeaflet, SliderSwiper6, SortingList } from "components";
 import { IHouse } from "interfaces";
 import { IImageFormData } from "components/HouseForm/ImageForm";
 import { toast } from "react-toastify";
@@ -17,6 +17,8 @@ const House = () => {
   const [loading, setLoading] = useState(true);
   const [imgLoading, setImgLoading] = useState(false);
   const [addImgOn, setAddImgOn] = useState(false);
+  const [sortImgOn, setSortImgOn] = useState(false);
+  const [imgOrder, setImgOrder] = useState<string[]>(null);
 
   const { id } = useParams();
   const auth = getAuth();
@@ -31,6 +33,7 @@ const House = () => {
 
       if (docSnap.exists()) {
         setHouse(docSnap.data() as IHouse);
+        setImgOrder(docSnap.data().imageUrls);
         setLoading(false);
       }
     };
@@ -73,7 +76,27 @@ const House = () => {
       setAddImgOn(false);
       toast.success(`Image(s) added to ${house.name} card!`);
       setHouse((prev) => ({ ...prev, imageUrls }));
+      setImgOrder(imageUrls);
     }
+  };
+
+  const orderSaveHandler = async () => {
+    if (imgOrder && imgOrder.length) {
+      setImgLoading(true);
+      const docRef = doc(db, "listings", id);
+      // todo: what about error??
+      await updateDoc(docRef, { imageUrls: imgOrder });
+      setImgLoading(false);
+      setAddImgOn(false);
+      toast.success(`Images sorted in ${house.name} card!`);
+      setSortImgOn(false);
+      setHouse((prev) => ({ ...prev, imageUrls: imgOrder }));
+    }
+  };
+
+  const orderCancelHandler = () => {
+    // to do вернуть порядок?
+    setSortImgOn(false);
   };
 
   const renderImagesBlock = () => {
@@ -87,13 +110,33 @@ const House = () => {
         </Container>
       );
 
+    if (sortImgOn)
+      return (
+        <Container>
+          <SectionHeader>Sort Images</SectionHeader>
+          <SortingList list={imgOrder} saver={setImgOrder} />
+          <Flex>
+            <SmallButton onClick={orderSaveHandler}>Save Order</SmallButton>
+            <SmallButton onClick={orderCancelHandler} color="orange">
+              Cancel
+            </SmallButton>
+          </Flex>
+        </Container>
+      );
+
+    // изображений нет и не хозяин дома
     if (!hasImages) return null;
 
     return (
       <SliderWrapper>
-        <ControlBlock>
-          <SmallButton onClick={() => setAddImgOn(true)}>Add Images</SmallButton>
-        </ControlBlock>
+        {isMy && (
+          <ControlBlock>
+            <SmallButton onClick={() => setAddImgOn(true)}>Add Images</SmallButton>
+            <SmallButton onClick={() => setSortImgOn(true)} color="orange">
+              Sort Images
+            </SmallButton>
+          </ControlBlock>
+        )}
         <SliderSwiper6 imgArray={house.imageUrls} height={300} />
       </SliderWrapper>
     );

@@ -6,7 +6,7 @@ interface ISortingList {
 }
 
 const SortingList = ({ list, saver }: ISortingList) => (
-  <DragList axis="x" values={list} onReorder={saver}>
+  <DragList axis="y" values={list} onReorder={saver}>
     {list.map((item: string) => (
       <DragItem value={item} key={item} bg={item} />
     ))}
